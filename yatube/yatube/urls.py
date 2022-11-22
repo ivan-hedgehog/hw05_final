@@ -11,6 +11,8 @@ urlpatterns = [
     path('about/', include('about.urls', namespace='about')),
 ]
 handler404 = 'core.views.page_not_found'
+handler403 = settings.CSRF_FAILURE_VIEW
+handler500 = 'core.views.internal_server_error'
 
 if settings.DEBUG:
     urlpatterns += static(

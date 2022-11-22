@@ -35,6 +35,7 @@ class PostURLTest(TestCase):
         self.guest_client = Client()
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
+        self.client_test = Client(enforce_csrf_checks=False)
         cache.clear()
 
     def guest_client_urls(self):
@@ -113,3 +114,8 @@ class PostURLTest(TestCase):
         """URL-адрес использует соответствующий шаблон."""
         response = self.authorized_client.get('/creato/')
         self.assertTemplateUsed(response, 'core/404.html')
+
+    def test_urls_403_correct_template(self):
+        """URL-адрес использует соответствующий шаблон."""
+        response = self.client_test.get('/create/')
+        self.assertTemplateUsed(response, 'core/404.html')       
