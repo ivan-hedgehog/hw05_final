@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}
+    Посты авторов, на которых подписан
+{% endblock %}
+{% block content %}
+<div class="container py-5">     
+      <h1> Все посты авторов, на которых подписан </h1>
+      <article>
+        {% include 'posts/includes/switcher.html' %}
+        {% for post in page_obj %}
+        <ul>
+          <li>
+            Автор: {{ post.author.get_full_name }}
+          </li>
+          <li>
+            Дата публикации: {{ post.pub_date|date:"d E Y" }}
+          </li>
+        </ul>      
+        {% include 'includes/picture.html' %}
+        <p>
+          {{ post.text }}
+        </p>
+        <a href="{% url 'posts:post_detail' post.pk %}">подробная информация</a>
+        <br>
+        {% if post.group %}   
+          <a href="{% url 'posts:group_list' post.group.slug %}"
+            >все записи группы</a>
+            {% endif %}
+        {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}   
+    </article>
+      <!-- под последним постом нет линии -->
+    </div>  
+{% include 'posts/includes/paginator.html' %}
+{% endblock %}
