@@ -9,8 +9,7 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           Дата публикации: {{ post.pub_date|date:"d E Y" }} 
-        </li>
-        <!-- если у поста есть группа -->   
+        </li>   
         <li class="list-group-item">
           Группа: {{ post.group }}
           {% if post.group %}   
@@ -22,7 +21,7 @@
           Автор: {{ post.author.get_full_name }}
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          Всего постов автора: {{ quantity_author_posts }}
+          Всего постов автора: {{ post.author.posts.count }}
         </li>
         <li class="list-group-item">
           <a href="{% url 'posts:profile' post.author %}">

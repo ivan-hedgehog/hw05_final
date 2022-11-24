@@ -14,7 +14,7 @@
           >
             Отписаться
           </a>
-        {% else %}
+        {% elif request.user != author %}
           <a
             class="btn btn-lg btn-primary"
             href="{% url 'posts:profile_follow' author.username %}" role="button"
