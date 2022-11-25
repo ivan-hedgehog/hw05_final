@@ -85,3 +85,4 @@ class PostCreateFormTests(TestCase):
                     ).exists()
                 )
                 self.assertEqual(image_0.name, self.post.image)
+                self.assertIn(image_0.name, self.post.image.name)
