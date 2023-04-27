@@ -15,6 +15,8 @@ handler403 = settings.CSRF_FAILURE_VIEW
 handler500 = 'core.views.internal_server_error'
 
 if settings.DEBUG:
+    import debug_toolbar
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
+    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
